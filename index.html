@@ -50,18 +50,39 @@
             font-size: 22px;
             font-weight: bold;
             color: #4f46e5;
+            margin-top: 5px;
         }
-        .btn-download {
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .btn {
             display: inline-block;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        /* Nút đăng ký màu đỏ YouTube */
+        .btn-sub {
+            background-color: #ff0000;
+            color: white;
+        }
+        .btn-sub:hover { background-color: #cc0000; }
+
+        /* Nút tải tài liệu màu xanh */
+        .btn-download {
             background-color: #10b981;
             color: white;
             padding: 12px 28px;
             font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 6px;
+            display: inline-block;
             margin-top: 15px;
-            transition: background 0.3s;
         }
         .btn-download:hover { background-color: #059669; }
         .hidden { display: none; }
@@ -71,7 +92,7 @@
 
 <div class="container">
     <h2>XEM VIDEO ĐỂ LẤY LINK TẢI TÀI LIỆU</h2>
-    <p>Vui lòng xem video trong lúc đồng hồ đếm ngược để hệ thống tự động mở nút tải tài liệu cho anh/chị.</p>
+    <p>Vui lòng xem video trong lúc đồng hồ đếm ngược và ủng hộ kênh của mình nhé!</p>
 
     <!-- Video YouTube -->
     <div class="video-container">
@@ -82,14 +103,20 @@
         </iframe>
     </div>
 
-    <!-- KHU VỰC ĐẾM NGƯỢC (30 GIÂY) -->
+    <!-- KHU VỰC ĐẾM NGƯỢC & NÚT ĐĂNG KÝ -->
     <div class="timer-box" id="timerBox">
         <p style="margin:0; font-size:14px; color:#4b5563;">Nút tải tài liệu sẽ xuất hiện sau:</p>
         <div class="countdown" id="countdown">30 giây</div>
+
+        <div class="action-buttons">
+            <a href="https://www.youtube.com/@dhsonit?sub_confirmation=1" class="btn btn-sub" target="_blank">
+                🔴 Đăng ký kênh ủng hộ mình nhé
+            </a>
+        </div>
     </div>
 
-    <!-- Nút tải Google Drive -->
-    <a href="https://drive.google.com/drive/u/1/folders/1mKoVL1wjZp1KO5XF4H6TMxHq542wXPQM" id="downloadBtn" class="btn-download hidden" target="_blank">
+    <!-- Nút tải Google Drive (Bị ẩn cho đến khi đếm về 0) -->
+    <a href="https://drive.google.com/drive/folders/1mKoVL1wjZp1KO5XF4H6TMxHq542wXPQM" id="downloadBtn" class="btn btn-download hidden" target="_blank">
         📥 TẢI TÀI LIỆU NGAY
     </a>
 </div>
@@ -108,8 +135,8 @@
 
         if (timeLeft <= 0) {
             clearInterval(timer);
-            timerBox.classList.add('hidden'); // Ẩn đồng hồ đếm ngược
-            downloadBtn.classList.remove('hidden'); // Hiện nút tải
+            timerBox.classList.add('hidden'); // Ẩn hộp đếm ngược và nút Đăng ký khi hết giờ
+            downloadBtn.classList.remove('hidden'); // Hiện nút tải tài liệu
         }
     }, 1000);
 </script>
