@@ -67,11 +67,14 @@
             text-decoration: none;
             border-radius: 6px;
             transition: background 0.3s;
+            cursor: pointer;
+            border: none;
         }
         /* Nút đăng ký màu đỏ YouTube */
         .btn-sub {
             background-color: #ff0000;
             color: white;
+            font-size: 16px;
         }
         .btn-sub:hover { background-color: #cc0000; }
 
@@ -91,9 +94,8 @@
 <body>
 
 <div class="container">
-    <!-- Tiêu đề đã chỉnh sửa -->
     <h2>ĐĂNG KÝ KÊNH ĐỂ KHÔNG PHẢI CHỜ NHÉ!</h2>
-    <p>Vui lòng xem video trong lúc đồng hồ đếm ngược và ủng hộ kênh của mình nhé!</p>
+    <p>Vui lòng bấm nút <b>Đăng ký kênh</b> bên dưới để mở khóa thời gian chờ hoặc tải file nhé!</p>
 
     <!-- Video YouTube (Tự động phát) -->
     <div class="video-container">
@@ -104,42 +106,53 @@
         </iframe>
     </div>
 
-    <!-- KHU VỰC ĐẾM NGƯỢC (60 GIÂY) & NÚT ĐĂNG KÝ -->
-    <div class="timer-box" id="timerBox">
-        <p style="margin:0; font-size:14px; color:#4b5563;">Nút tải tài liệu sẽ xuất hiện sau:</p>
-        <div class="countdown" id="countdown">60 giây</div>
-
-        <div class="action-buttons">
-            <a href="https://www.youtube.com/@dhsonit?sub_confirmation=1" class="btn btn-sub" target="_blank">
-                🔴 Đăng ký kênh ủng hộ mình nhé
-            </a>
-        </div>
+    <!-- NÚT BẤM ĐĂNG KÝ (Hiển thị đầu tiên, chưa bấm thì chưa đếm ngược) -->
+    <div class="timer-box" id="subBox">
+        <p style="margin:0 0 10px 0; font-size:14px; color:#4b5563;">Bước 1: Ủng hộ kênh của mình trước khi lấy file</p>
+        <button class="btn btn-sub" onclick="startCountdown()">
+            🔴 ĐĂNG KÝ KÊNH NGAY
+        </button>
     </div>
 
-    <!-- Nút tải Google Drive (Nhãn đã sửa: TẢI FILE Ở ĐÂY) -->
+    <!-- KHU VỰC ĐẾM NGƯỢC (Bị ẩn lúc đầu, khi bấm đăng ký mới hiện ra và đếm) -->
+    <div class="timer-box hidden" id="timerBox">
+        <p style="margin:0; font-size:14px; color:#4b5563;">Cảm ơn bạn đã đăng ký! Nút tải sẽ xuất hiện sau:</p>
+        <div class="countdown" id="countdown">60 giây</div>
+    </div>
+
+    <!-- Nút tải Google Drive (Bị ẩn cho đến khi đếm về 0) -->
     <a href="https://drive.google.com/drive/folders/1mKoVL1wjZp1KO5XF4H6TMxHq542wXPQM" id="downloadBtn" class="btn btn-download hidden" target="_blank">
         📥 TẢI FILE Ở ĐÂY
     </a>
 </div>
 
 <script>
-    // Cấu hình thời gian đếm ngược: 60 giây
-    let timeLeft = 60; 
+    function startCountdown() {
+        // 1. Mở link đăng ký kênh ra tab mới (có kèm bảng xác nhận Sub)
+        window.open('https://www.youtube.com/@dhsonit?sub_confirmation=1', '_blank');
 
-    const countdownEl = document.getElementById('countdown');
-    const timerBox = document.getElementById('timerBox');
-    const downloadBtn = document.getElementById('downloadBtn');
+        // 2. Ẩn khung nút bấm đăng ký đi
+        document.getElementById('subBox').classList.add('hidden');
 
-    const timer = setInterval(() => {
-        timeLeft--;
-        countdownEl.innerText = timeLeft + " giây";
+        // 3. Hiện khung đếm ngược lên và bắt đầu chạy
+        document.getElementById('timerBox').classList.remove('hidden');
 
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            timerBox.classList.add('hidden'); // Ẩn hộp đếm ngược khi hết giờ
-            downloadBtn.classList.remove('hidden'); // Hiện nút tải tài liệu
-        }
-    }, 1000);
+        let timeLeft = 60; 
+        const countdownEl = document.getElementById('countdown');
+        const timerBox = document.getElementById('timerBox');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        const timer = setInterval(() => {
+            timeLeft--;
+            countdownEl.innerText = timeLeft + " giây";
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                timerBox.classList.add('hidden'); // Ẩn khung đếm ngược khi hết giờ
+                downloadBtn.classList.remove('hidden'); // Hiện nút tải file
+            }
+        }, 1000);
+    }
 </script>
 
 </body>
