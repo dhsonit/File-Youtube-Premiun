@@ -94,9 +94,9 @@
     <h2>XEM VIDEO ĐỂ LẤY LINK TẢI TÀI LIỆU</h2>
     <p>Vui lòng xem video trong lúc đồng hồ đếm ngược và ủng hộ kênh của mình nhé!</p>
 
-    <!-- Video YouTube -->
+    <!-- Video YouTube (Đã cài Autoplay) -->
     <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/bnAwYfbCREw" 
+        <iframe src="https://www.youtube.com/embed/bnAwYfbCREw?autoplay=1&mute=1" 
                 title="YouTube video player" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen>
@@ -115,14 +115,13 @@
         </div>
     </div>
 
-    <!-- Nút tải Google Drive (Bị ẩn cho đến khi đếm về 0) -->
+    <!-- Nút tải Google Drive -->
     <a href="https://drive.google.com/drive/folders/1mKoVL1wjZp1KO5XF4H6TMxHq542wXPQM" id="downloadBtn" class="btn btn-download hidden" target="_blank">
         📥 TẢI TÀI LIỆU NGAY
     </a>
 </div>
 
 <script>
-    // Cấu hình thời gian đếm ngược: 30 giây
     let timeLeft = 30; 
 
     const countdownEl = document.getElementById('countdown');
@@ -135,8 +134,8 @@
 
         if (timeLeft <= 0) {
             clearInterval(timer);
-            timerBox.classList.add('hidden'); // Ẩn hộp đếm ngược và nút Đăng ký khi hết giờ
-            downloadBtn.classList.remove('hidden'); // Hiện nút tải tài liệu
+            timerBox.classList.add('hidden');
+            downloadBtn.classList.remove('hidden');
         }
     }, 1000);
 </script>
