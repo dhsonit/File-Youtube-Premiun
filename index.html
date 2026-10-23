@@ -94,7 +94,6 @@
 <body>
 
 <div class="container">
-    <!-- Tiêu đề mới cập nhật -->
     <h2>ĐĂNG KÝ KÊNH ĐỂ ĐƯỢC CẤP QUYỀN TẢI FILE NHÉ</h2>
     <p>Vui lòng bấm nút <b>Đăng ký kênh</b> bên dưới để hệ thống cấp quyền và đếm ngược mở link tải file nhé!</p>
 
@@ -107,11 +106,11 @@
         </iframe>
     </div>
 
-    <!-- NÚT BẤM ĐĂNG KÝ (Bấm mới kích hoạt đếm ngược) -->
+    <!-- NÚT BẤM ĐĂNG KÝ -->
     <div class="timer-box" id="subBox">
-        <p style="margin:0 0 10px 0; font-size:14px; color:#4b5563;">Bước 1: Bấm đăng ký kênh để cấp quyền tải file</p>
+        <p style="margin:0 0 10px 0; font-size:14px; color:#4b5563;">Vui lòng bấm đăng ký kênh</p>
         <button class="btn btn-sub" onclick="startCountdown()">
-            🔴 ĐĂNG KÝ KÊNH NGAY
+            🔴 ĐĂNG KÝ KÊNH
         </button>
     </div>
 
@@ -129,7 +128,7 @@
 
 <script>
     function startCountdown() {
-        // 1. Mở link đăng ký kênh ra tab mới (có bảng xác nhận Sub)
+        // 1. Mở link đăng ký kênh ra tab mới
         window.open('https://www.youtube.com/@dhsonit?sub_confirmation=1', '_blank');
 
         // 2. Ẩn nút đăng ký
